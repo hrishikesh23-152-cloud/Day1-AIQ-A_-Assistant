@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const backend = process.env.NEXT_PUBLIC_BACKEND_URL
+const backend = "https://day1-aiq-a-assistant-o746.onrender.com"
 
 export async function POST(req:Request){
     try {
