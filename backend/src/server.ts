@@ -9,7 +9,7 @@ const app = express();
 app.use(
     cors({
         origin:["http://localhost:3000","https://day1-aiq-a-assistant-o746.onrender.com"],
-        methods:['"POST","GET","OPTIONS","DELETE"],
+        methods:["POST","GET","OPTIONS","DELETE"],
         allowedHeaders:['Content-Type','Authorization'],
         credentials:false
     })
