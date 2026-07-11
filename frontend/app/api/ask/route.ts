@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 
-const backend = "https://day1-aiq-a-assistant-o746.onrender.com"
+const backend = "https://day1-aiq-a-assistant-backend-7p4o.onrender.com"
 
 export async function POST(req:Request){
     try {
