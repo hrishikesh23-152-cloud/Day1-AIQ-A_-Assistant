@@ -4,6 +4,8 @@ My first GenAI project built with **Next.js** and **Node.js**.
 
 🌐 **Live Demo:** https://day1-aiq-a-assistant-client.onrender.com/
 
+<img width="300" height="300" alt="image"  src="https://github.com/user-attachments/assets/eb5ecbed-27a0-47a3-a142-3041271b46d2" />
+
 ---
 
 ## 📖 About
