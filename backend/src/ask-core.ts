@@ -1,24 +1,25 @@
 import { createChatModel } from "./ic-model";
-import {Result, ResultSchema} from "./schema";
+import { Result, ResultSchema } from "./schema";
 
-export async function StructuredOutput(query:string):Promise<Result>{
-    const {model} = createChatModel();
+export async function StructuredOutput(query: string): Promise<Result> {
+  const { model } = createChatModel();
 
-    const system = "you are a cool assistant. Return only the requested JSON."
-    const user = "Summarize for a beginner:\n" +
-    `"${query}"\n`+
-    `return fields:Summary:(short paragraph),confidence:(0 to 1)`;
+  const system = "You are an expert assistant that explains topics simply for beginners.";
+  const user = `Summarize the following concept clearly:\n"${query}"`;
 
-    const result = model.withStructuredOutput(ResultSchema)
-    const structuredResult = await result.invoke([
-        {
-            role:'system',
-            content:system
-        },
-        {
-            role:'user',
-            content:user
-        }
-    ])
-    return structuredResult;
+  // withStructuredOutput automatically enforces the schema
+  const structuredModel = model.withStructuredOutput(ResultSchema);
+
+  const structuredResult = await structuredModel.invoke([
+    {
+      role: "system",
+      content: system,
+    },
+    {
+      role: "user",
+      content: user,
+    },
+  ]);
+
+  return structuredResult;
 }
