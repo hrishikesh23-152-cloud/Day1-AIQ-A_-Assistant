@@ -1,8 +1,9 @@
-import dotenv from 'dotenv';
-let loaded = false
+import dotenv from "dotenv";
 
-export function loadenv():void{
-    if(loaded) return;
-    dotenv.config();
-    loaded = true;
+let loaded = false;
+
+export function loadenv(): void {
+  if (loaded) return;
+  dotenv.config();
+  loaded = true;
 }
