@@ -1,40 +1,49 @@
-import express from 'express';
-import cors from 'cors';
-import {loadenv} from "./env"
-import {StructuredOutput} from "./ask-core"
+import express from "express";
+import cors from "cors";
+import { loadenv } from "./env";
+import { StructuredOutput } from "./ask-core";
 
 loadenv();
-const PORT = process.env.PORT
+const PORT = Number(process.env.PORT) || 4000;
 const app = express();
+
 app.use(
-    cors({
-        origin:["http://localhost:3000","https://day1-aiq-a-assistant-client.onrender.com"],
-        
-        methods:["POST","GET","OPTIONS","DELETE"],
-        allowedHeaders:['Content-Type','Authorization'],
-        credentials:false
-    })
-)
+  cors({
+    origin: [
+      "http://localhost:3000",
+      "https://day1-aiq-a-assistant-client.onrender.com",
+    ],
+    methods: ["POST", "GET", "OPTIONS", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: false,
+  })
+);
+
 app.use(express.json());
 
-app.post('/ask',async(req,res)=>{
-    try {
-        const {query} = req.body ?? {};
-        if(!query || !String(query).trim()){
-            return res.status(400).json({
-                error:"query is required"
-            });
-        }
-        const out = await StructuredOutput(query);
-        return res.status(200).json({
-            output:out
-        })
-    } catch (error:any) {
-        return res.status(500).json({
-            Error:"Not responding"
-        })
+app.post("/ask", async (req, res) => {
+  try {
+    const { query } = req.body ?? {};
+
+    if (!query || !String(query).trim()) {
+      return res.status(400).json({
+        error: "query is required",
+      });
     }
-})
-app.listen(PORT,()=>{
-    console.log(`server is listening at "http://localhost:${PORT}"`)
-})
+
+    const out = await StructuredOutput(query);
+
+    return res.status(200).json({
+      output: out,
+    });
+  } catch (error: any) {
+    console.error("Error handling /ask request:", error);
+    return res.status(500).json({
+      error: error?.message || "Internal server error",
+    });
+  }
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is listening at http://localhost:${PORT}`);
+});
