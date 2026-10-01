@@ -11,7 +11,7 @@ export function createChatModel(): { provider: Provider; model: any } {
   const base = { temperature: 0.3 };
 
   // Use llama-3.3-70b-versatile or llama-3.1-8b-instant
-  const chosenModel = "llama-3.1-8b-instant";
+  const chosenModel = "openai/gpt-oss-20b";
 
   if (forced === "groq" || (!forced && hasGroqAPI)) {
     return {
